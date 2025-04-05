@@ -9,7 +9,7 @@ pub mod accounts_ix;
 use accounts_ix::*;
 
 
-declare_id!("Fg6PaFpoGXkYsidMpWxqSWz4LmD3FZXx74h57PjAgUmu");
+declare_id!("94wZdgCJV4HqyQVNbK54sbwBqTp6THkF2DKfMy58jP4n");
 
 #[program]
 
@@ -36,11 +36,11 @@ pub mod staking_pool {
         withdraw(ctx)
     }
 
-    pub fn view_current_user_rewards(ctx: Context<ViewUserRewards>) -> Result<u64> {
+    pub fn view_current_user_rewards(ctx: Context<ViewUserRewards>) -> Result<crate::types::StakingStats> {
         view_user_rewards(ctx)
     }
 
-    pub fn view_total_pool_stats(ctx: Context<ViewPoolStats>) -> Result<crate::types::PoolStats> {
+    pub fn view_total_pool_stats(ctx: Context<ViewPoolStats>) -> Result<crate::types::StakingStats> {
         view_pool_stats(ctx)
     }
 }

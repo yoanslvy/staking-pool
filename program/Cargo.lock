@@ -2235,7 +2235,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "staking-pool"
+name = "staking_pool"
 version = "0.1.0"
 dependencies = [
  "anchor-lang",
