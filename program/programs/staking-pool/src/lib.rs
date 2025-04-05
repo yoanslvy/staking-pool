@@ -1,15 +1,16 @@
 use anchor_lang::prelude::*;
 
 pub mod instructions;
+pub mod accounts_ix; 
 pub mod state;
 pub mod error;
 pub mod types;
-pub mod accounts_ix; 
+
 
 use accounts_ix::*;
 
 
-declare_id!("94wZdgCJV4HqyQVNbK54sbwBqTp6THkF2DKfMy58jP4n");
+declare_id!("DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r");
 
 #[program]
 
@@ -17,7 +18,7 @@ pub mod staking_pool {
     use super::*;
 
     use self::instructions::{
-        initiate_pool, undelegate, deposit, withdraw,view_user_rewards, view_pool_stats
+        initiate_pool, undelegate, deposit, finalize_withdraw, start_withdraw, view_user_rewards, view_pool_stats
     };
 
     pub fn initiate_pool_config(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()> {
@@ -28,12 +29,16 @@ pub mod staking_pool {
         undelegate(ctx)
     }
 
+    pub fn start_withdraw_stake(ctx: Context<StartWithdraw>) -> Result<()> {
+        start_withdraw(ctx)
+    }
+
     pub fn deposit_stake(ctx: Context<Deposit>, amount: u64) -> Result<()> {
         deposit(ctx, amount)
     }
 
-    pub fn withdraw_stake(ctx: Context<Withdraw>) -> Result<()> {
-        withdraw(ctx)
+    pub fn finalize_withdraw_stake(ctx: Context<FinalizeWithdraw>) -> Result<()> {
+        finalize_withdraw(ctx)
     }
 
     pub fn view_current_user_rewards(ctx: Context<ViewUserRewards>) -> Result<crate::types::StakingStats> {

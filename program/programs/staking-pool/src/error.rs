@@ -4,4 +4,8 @@ use anchor_lang::prelude::*;
 pub enum CustomError {
     #[msg("Unstake delay not satisfied")]
     UnstakeDelay,
+    #[msg("Withdraw already started")]
+    WithdrawAlreadyStarted,
+    #[msg("Withdraw not started")]
+    WithdrawNotStarted,
 }

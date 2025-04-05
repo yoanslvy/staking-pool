@@ -1,5 +1,5 @@
 {
-  "address": "94wZdgCJV4HqyQVNbK54sbwBqTp6THkF2DKfMy58jP4n",
+  "address": "DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r",
   "metadata": {
     "name": "staking_pool",
     "version": "0.1.0",
@@ -50,6 +50,43 @@
       ]
     },
     {
+      "name": "finalize_withdraw_stake",
+      "discriminator": [
+        105,
+        43,
+        65,
+        138,
+        232,
+        231,
+        206,
+        45
+      ],
+      "accounts": [
+        {
+          "name": "user_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true
+        },
+        {
+          "name": "stake_account",
+          "writable": true
+        },
+        {
+          "name": "clock",
+          "address": "SysvarC1ock11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initiate_pool_config",
       "discriminator": [
         205,
@@ -64,6 +101,9 @@
       "accounts": [
         {
           "name": "pool",
+          "docs": [
+            "Unique pool PDA derived from seed [\"pool\", payer]"
+          ],
           "writable": true,
           "pda": {
             "seeds": [
@@ -75,6 +115,10 @@
                   111,
                   108
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "payer"
               }
             ]
           }
@@ -84,27 +128,16 @@
           "writable": true
         },
         {
-          "name": "validator_vote"
-        },
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        },
-        {
-          "name": "stake_program",
-          "address": "Stake11111111111111111111111111111111111111"
-        },
-        {
-          "name": "rent",
-          "address": "SysvarRent111111111111111111111111111111111"
+          "name": "validator_vote",
+          "docs": [
+            "Validator vote account passed in via argument"
+          ]
         },
         {
           "name": "clock",
+          "docs": [
+            "Sysvars and constants"
+          ],
           "address": "SysvarC1ock11111111111111111111111111111111"
         },
         {
@@ -114,6 +147,22 @@
         {
           "name": "stake_config",
           "address": "StakeConfig11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "payer",
+          "docs": [
+            "Transaction payer"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -122,6 +171,26 @@
           "type": "pubkey"
         }
       ]
+    },
+    {
+      "name": "start_withdraw_stake",
+      "discriminator": [
+        227,
+        138,
+        126,
+        135,
+        132,
+        142,
+        42,
+        214
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true
+        }
+      ],
+      "args": []
     },
     {
       "name": "undelegate_pool_stake",
@@ -201,43 +270,6 @@
           "name": "StakingStats"
         }
       }
-    },
-    {
-      "name": "withdraw_stake",
-      "discriminator": [
-        153,
-        8,
-        22,
-        138,
-        105,
-        176,
-        87,
-        66
-      ],
-      "accounts": [
-        {
-          "name": "user_wallet",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "stake_account",
-          "writable": true
-        },
-        {
-          "name": "pool",
-          "writable": true
-        },
-        {
-          "name": "user",
-          "writable": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
@@ -273,6 +305,16 @@
       "code": 6000,
       "name": "UnstakeDelay",
       "msg": "Unstake delay not satisfied"
+    },
+    {
+      "code": 6001,
+      "name": "WithdrawAlreadyStarted",
+      "msg": "Withdraw already started"
+    },
+    {
+      "code": 6002,
+      "name": "WithdrawNotStarted",
+      "msg": "Withdraw not started"
     }
   ],
   "types": [
@@ -332,6 +374,12 @@
           {
             "name": "shares",
             "type": "u64"
+          },
+          {
+            "name": "withdraw_requested_at",
+            "type": {
+              "option": "u64"
+            }
           }
         ]
       }

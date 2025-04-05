@@ -4,16 +4,17 @@ use crate::accounts_ix::Undelegate;
 
 
 pub fn undelegate(ctx: Context<Undelegate>) -> Result<()> {
-    let pool = &mut ctx.accounts.pool;
-    let deactivate_ix = stake::instruction::deactivate_stake(
+    let pool = &ctx.accounts.pool;
+    let ix = stake::instruction::deactivate_stake(
         &ctx.accounts.stake_account.key(),
         &pool.key(),
     );
     invoke(
-        &deactivate_ix,
+        &ix,
         &[
             ctx.accounts.stake_account.clone(),
-            ctx.accounts.clock.to_account_info(),
+            ctx.accounts.clock.clone(),
+            ctx.accounts.pool.to_account_info(),
         ],
     )?;
     Ok(())

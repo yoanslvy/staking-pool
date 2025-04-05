@@ -1,7 +1,10 @@
 use anchor_lang::prelude::*;
-use anchor_lang::solana_program::{program::invoke, stake};
-use crate::accounts_ix::InitiatePool; 
+use anchor_lang::solana_program::{
+    program::invoke_signed,
+    stake::{ instruction as stake_instruction, state::Authorized, state::Lockup},
+};
 
+use crate::accounts_ix::InitiatePool;
 
 pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()> {
     let pool = &mut ctx.accounts.pool;
@@ -10,40 +13,39 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
     pool.total_staked = 0;
     pool.total_shares = 0;
 
-    let authorized = stake::state::Authorized {
-        staker: pool.key(),
-        withdrawer: pool.key(),
+    let pool_key = pool.key();
+    let stake_key = ctx.accounts.stake_account.key();
+
+    let authorized = Authorized {
+        staker: pool_key,
+        withdrawer: pool_key,
     };
 
-    let lockup = stake::state::Lockup::default();
+    let lockup = Lockup::default();
 
-    let initialize_ix = stake::instruction::initialize(
-        &ctx.accounts.stake_account.key(),
-        &authorized,
-        &lockup,
-    );
-    invoke(
+    // Initialize stake account
+    let initialize_ix = stake_instruction::initialize(&stake_key, &authorized, &lockup);
+    invoke_signed(
         &initialize_ix,
         &[
-            ctx.accounts.stake_account.clone(),
-            ctx.accounts.rent.clone(),
+            ctx.accounts.stake_account.to_account_info(),
+            ctx.accounts.rent.to_account_info(),
         ],
+        &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
 
-    let delegate_ix = stake::instruction::delegate_stake(
-        &ctx.accounts.stake_account.key(),
-        &pool.key(),
-        &ctx.accounts.validator_vote.key(),
-    );
-    invoke(
+    // Delegate to validator
+    let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &validator);
+    invoke_signed(
         &delegate_ix,
         &[
-            ctx.accounts.stake_account.clone(),
-            ctx.accounts.validator_vote.clone(),
-            ctx.accounts.clock.clone(),
-            ctx.accounts.stake_history.clone(),
-            ctx.accounts.stake_config.clone(),
+            ctx.accounts.stake_account.to_account_info(),
+            ctx.accounts.validator_vote.to_account_info(),
+            ctx.accounts.clock.to_account_info(),
+            ctx.accounts.stake_history.to_account_info(),
+            ctx.accounts.stake_config.to_account_info(),
         ],
+        &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
 
     Ok(())

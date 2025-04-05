@@ -5,7 +5,7 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-staking_pool = "94wZdgCJV4HqyQVNbK54sbwBqTp6THkF2DKfMy58jP4n"
+staking_pool = "DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r"
 
 [registry]
 url = "https://api.apr.dev"

@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/staking_pool.json`.
  */
 export type StakingPool = {
-  "address": "94wZdgCJV4HqyQVNbK54sbwBqTp6THkF2DKfMy58jP4n",
+  "address": "DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r",
   "metadata": {
     "name": "stakingPool",
     "version": "0.1.0",
@@ -56,6 +56,43 @@ export type StakingPool = {
       ]
     },
     {
+      "name": "finalizeWithdrawStake",
+      "discriminator": [
+        105,
+        43,
+        65,
+        138,
+        232,
+        231,
+        206,
+        45
+      ],
+      "accounts": [
+        {
+          "name": "userWallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "user",
+          "writable": true
+        },
+        {
+          "name": "stakeAccount",
+          "writable": true
+        },
+        {
+          "name": "clock",
+          "address": "SysvarC1ock11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
       "name": "initiatePoolConfig",
       "discriminator": [
         205,
@@ -70,6 +107,9 @@ export type StakingPool = {
       "accounts": [
         {
           "name": "pool",
+          "docs": [
+            "Unique pool PDA derived from seed [\"pool\", payer]"
+          ],
           "writable": true,
           "pda": {
             "seeds": [
@@ -81,6 +121,10 @@ export type StakingPool = {
                   111,
                   108
                 ]
+              },
+              {
+                "kind": "account",
+                "path": "payer"
               }
             ]
           }
@@ -90,27 +134,16 @@ export type StakingPool = {
           "writable": true
         },
         {
-          "name": "validatorVote"
-        },
-        {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
-        },
-        {
-          "name": "stakeProgram",
-          "address": "Stake11111111111111111111111111111111111111"
-        },
-        {
-          "name": "rent",
-          "address": "SysvarRent111111111111111111111111111111111"
+          "name": "validatorVote",
+          "docs": [
+            "Validator vote account passed in via argument"
+          ]
         },
         {
           "name": "clock",
+          "docs": [
+            "Sysvars and constants"
+          ],
           "address": "SysvarC1ock11111111111111111111111111111111"
         },
         {
@@ -120,6 +153,22 @@ export type StakingPool = {
         {
           "name": "stakeConfig",
           "address": "StakeConfig11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "payer",
+          "docs": [
+            "Transaction payer"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "systemProgram",
+          "address": "11111111111111111111111111111111"
         }
       ],
       "args": [
@@ -128,6 +177,26 @@ export type StakingPool = {
           "type": "pubkey"
         }
       ]
+    },
+    {
+      "name": "startWithdrawStake",
+      "discriminator": [
+        227,
+        138,
+        126,
+        135,
+        132,
+        142,
+        42,
+        214
+      ],
+      "accounts": [
+        {
+          "name": "user",
+          "writable": true
+        }
+      ],
+      "args": []
     },
     {
       "name": "undelegatePoolStake",
@@ -207,43 +276,6 @@ export type StakingPool = {
           "name": "stakingStats"
         }
       }
-    },
-    {
-      "name": "withdrawStake",
-      "discriminator": [
-        153,
-        8,
-        22,
-        138,
-        105,
-        176,
-        87,
-        66
-      ],
-      "accounts": [
-        {
-          "name": "userWallet",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "stakeAccount",
-          "writable": true
-        },
-        {
-          "name": "pool",
-          "writable": true
-        },
-        {
-          "name": "user",
-          "writable": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
@@ -279,6 +311,16 @@ export type StakingPool = {
       "code": 6000,
       "name": "unstakeDelay",
       "msg": "Unstake delay not satisfied"
+    },
+    {
+      "code": 6001,
+      "name": "withdrawAlreadyStarted",
+      "msg": "Withdraw already started"
+    },
+    {
+      "code": 6002,
+      "name": "withdrawNotStarted",
+      "msg": "Withdraw not started"
     }
   ],
   "types": [
@@ -338,6 +380,12 @@ export type StakingPool = {
           {
             "name": "shares",
             "type": "u64"
+          },
+          {
+            "name": "withdrawRequestedAt",
+            "type": {
+              "option": "u64"
+            }
           }
         ]
       }
