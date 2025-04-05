@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use crate::types::PoolStats;
-use crate::accounts::ViewPoolStats;
+use crate::accounts_ix::ViewPoolStats;
 
 pub fn view_pool_stats(ctx: Context<ViewPoolStats>) -> Result<PoolStats> {
     let pool = &ctx.accounts.pool;

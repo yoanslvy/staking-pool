@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{program::invoke, system_instruction};
-use crate::accounts::Withdraw;
+use crate::accounts_ix::Withdraw;
 
 pub fn withdraw(ctx: Context<Withdraw>) -> Result<()> {
     let user = &mut ctx.accounts.user;

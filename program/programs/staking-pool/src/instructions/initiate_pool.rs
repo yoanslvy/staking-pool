@@ -1,12 +1,12 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{program::invoke, stake};
-use crate::accounts::InitiatePool;
+use crate::accounts_ix::InitiatePool; 
 
 
 pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()> {
     let pool = &mut ctx.accounts.pool;
     pool.validator = validator;
-    pool.bump = *ctx.bumps.get("pool").unwrap();
+    pool.bump = ctx.bumps.pool;
     pool.total_staked = 0;
     pool.total_shares = 0;
 
@@ -14,6 +14,7 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         staker: pool.key(),
         withdrawer: pool.key(),
     };
+
     let lockup = stake::state::Lockup::default();
 
     let initialize_ix = stake::instruction::initialize(
@@ -25,7 +26,7 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &initialize_ix,
         &[
             ctx.accounts.stake_account.clone(),
-            ctx.accounts.rent.to_account_info(),
+            ctx.accounts.rent.clone(),
         ],
     )?;
 
@@ -39,9 +40,9 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &[
             ctx.accounts.stake_account.clone(),
             ctx.accounts.validator_vote.clone(),
-            ctx.accounts.clock.to_account_info(),
-            ctx.accounts.stake_history.to_account_info(),
-            ctx.accounts.stake_config.to_account_info(),
+            ctx.accounts.clock.clone(),
+            ctx.accounts.stake_history.clone(),
+            ctx.accounts.stake_config.clone(),
         ],
     )?;
 

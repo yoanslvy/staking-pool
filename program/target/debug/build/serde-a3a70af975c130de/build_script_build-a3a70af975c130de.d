@@ -1,0 +1,5 @@
+/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/build/serde-a3a70af975c130de/build_script_build-a3a70af975c130de: /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.217/build.rs
+
+/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/build/serde-a3a70af975c130de/build_script_build-a3a70af975c130de.d: /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.217/build.rs
+
+/Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.217/build.rs:
