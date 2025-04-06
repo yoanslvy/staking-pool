@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/staking_pool.json`.
  */
 export type StakingPool = {
-  "address": "DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r",
+  "address": "C8FMH88d7iLYDzPfCjN8422U15KyBkR5ZHX7UTY23DyU",
   "metadata": {
     "name": "stakingPool",
     "version": "0.1.0",
@@ -134,10 +134,7 @@ export type StakingPool = {
           "writable": true
         },
         {
-          "name": "validatorVote",
-          "docs": [
-            "Validator vote account passed in via argument"
-          ]
+          "name": "validatorVote"
         },
         {
           "name": "clock",
@@ -157,6 +154,10 @@ export type StakingPool = {
         {
           "name": "rent",
           "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "stakeProgram",
+          "address": "Stake11111111111111111111111111111111111111"
         },
         {
           "name": "payer",

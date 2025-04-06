@@ -30,6 +30,8 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &[
             ctx.accounts.stake_account.to_account_info(),
             ctx.accounts.rent.to_account_info(),
+            ctx.accounts.stake_program.to_account_info(), 
+
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
@@ -44,6 +46,8 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
             ctx.accounts.clock.to_account_info(),
             ctx.accounts.stake_history.to_account_info(),
             ctx.accounts.stake_config.to_account_info(),
+            ctx.accounts.stake_program.to_account_info(), 
+
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;

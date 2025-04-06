@@ -20,56 +20,60 @@ const SYSVAR_RENT = web3.SYSVAR_RENT_PUBKEY;
 const SYSVAR_STAKE_HISTORY = web3.SYSVAR_STAKE_HISTORY_PUBKEY;
 
 const path = process.env.KEY_PATH;
-
-// A random validator from explorer
 const validatorId = "29MRNwc7LYWH6Bm457ch8HcLmHVGuzGGA6KNSar2snP2";
 
 const exec = async (): Promise<void> => {
-  // Load wallet keypair
+  // 🔐 Load wallet
   const payer = Keypair.fromSecretKey(
     new Uint8Array(
       JSON.parse(fs.readFileSync(`${path}.config/solana/devnet.json`, "utf-8"))
     )
   );
 
-  // Create provider and program client
   const solanaClient = new Connection("https://api.devnet.solana.com", "confirmed");
   const provider = new AnchorProvider(solanaClient, new Wallet(payer), AnchorProvider.defaultOptions());
   const program = new Program(stakingPoolIdl as any, provider) as any;
   const validatorVote = new PublicKey(validatorId);
 
-  // 🔐 Updated: pool PDA includes payer
+  console.log(program.programId.toBase58())
+
+  // 🆔 Derive pool PDA (Anchor will init this PDA inside the program)
   const [poolPda, bump] = web3.PublicKey.findProgramAddressSync(
     [Buffer.from("pool"), payer.publicKey.toBuffer()],
     program.programId
   );
+  console.log("Pool PDA:", poolPda.toBase58());
 
-  // Generate stake account and fund it
+  // 🏗️ Create uninitialized stake account with SystemProgram
   const stakeAccount = Keypair.generate();
   const STAKE_ACCOUNT_SPACE = 200;
   const lamports = await solanaClient.getMinimumBalanceForRentExemption(STAKE_ACCOUNT_SPACE);
 
-  const createStakeIx = StakeProgram.createAccount({
+  const createStakeIx = SystemProgram.createAccount({
     fromPubkey: payer.publicKey,
-    stakePubkey: stakeAccount.publicKey,
-    authorized: {
-      staker: payer.publicKey,
-      withdrawer: payer.publicKey,
-    },
+    newAccountPubkey: stakeAccount.publicKey,
     lamports,
+    space: STAKE_ACCOUNT_SPACE,
+    programId: STAKE_PROGRAM_ID,
   });
 
-  const createTx = new web3.Transaction().add(createStakeIx);
-  const txHash = await provider.sendAndConfirm(createTx, [payer, stakeAccount]);
+  const tx1 = new web3.Transaction().add(createStakeIx);
+  const tx1Hash = await provider.sendAndConfirm(tx1, [payer, stakeAccount]);
+  console.log("✅ Stake account created:", tx1Hash);
 
-  console.log("✅ Stake account created:", txHash);
-
+  // Debug: confirm account state
   const stakeInfo = await solanaClient.getAccountInfo(stakeAccount.publicKey);
   console.log("Stake Account Owner:", stakeInfo?.owner.toBase58());
   console.log("Stake Account Data Length:", stakeInfo?.data.length);
 
-  // Call Anchor instruction
-  const tx = await program.methods
+  console.log("Calling with accounts:", {
+    pool: poolPda.toBase58(),
+    stakeAccount: stakeAccount.publicKey.toBase58(),
+    validatorVote: validatorVote.toBase58(),
+    payer: payer.publicKey.toBase58(),
+  });
+
+  const ix = await program.methods
     .initiatePoolConfig(validatorVote)
     .accounts({
       pool: poolPda,
@@ -77,16 +81,18 @@ const exec = async (): Promise<void> => {
       validatorVote,
       payer: payer.publicKey,
       systemProgram: SystemProgram.programId,
-      stakeProgram: STAKE_PROGRAM_ID,
       rent: SYSVAR_RENT,
       clock: SYSVAR_CLOCK,
       stakeHistory: SYSVAR_STAKE_HISTORY,
       stakeConfig: STAKE_CONFIG_ID,
+      stakeProgram: STAKE_PROGRAM_ID,
     })
-    .signers([payer])
-    .rpc();
+    .instruction();
 
-  console.log("✅ Pool config initialized:", tx);
+  const tx = new web3.Transaction().add(ix);
+  const txHash = await provider.sendAndConfirm(tx, [payer]);
+
+  console.log("✅ Pool config initialized:", txHash);
 };
 
 exec().catch((error) => {

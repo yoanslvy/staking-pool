@@ -6,11 +6,9 @@ pub mod state;
 pub mod error;
 pub mod types;
 
-
 use accounts_ix::*;
 
-
-declare_id!("DjNn4MyhY2SGKrjLygcrYW89x52veVknfVcMkB8h9N9r");
+declare_id!("C8FMH88d7iLYDzPfCjN8422U15KyBkR5ZHX7UTY23DyU");
 
 #[program]
 

@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{
-    stake::{config::ID as STAKE_CONFIG_ID},
+    stake::{config::ID as STAKE_CONFIG_ID, program::ID as STAKE_PROGRAM_ID},
     sysvar::{clock::ID as CLOCK_ID, rent::ID as RENT_ID, stake_history::ID as STAKE_HISTORY_ID},
 };
 
@@ -22,7 +22,6 @@ pub struct InitiatePool<'info> {
     #[account(mut)]
     pub stake_account: UncheckedAccount<'info>,
 
-    /// Validator vote account passed in via argument
     /// CHECK: Not deserialized, just used for pubkey
     pub validator_vote: UncheckedAccount<'info>,
 
@@ -41,6 +40,10 @@ pub struct InitiatePool<'info> {
     /// CHECK: rent ID
     #[account(address = RENT_ID)]
     pub rent: Sysvar<'info, Rent>,
+
+    /// CHECK: Required for invoking stake CPI
+    #[account(address = STAKE_PROGRAM_ID)]
+    pub stake_program: UncheckedAccount<'info>,
 
     /// Transaction payer
     #[account(mut)]
