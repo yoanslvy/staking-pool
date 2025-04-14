@@ -7,6 +7,8 @@ use anchor_lang::solana_program::{
 use crate::accounts_ix::InitiatePool;
 
 pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()> {
+    msg!("Stake config: {}", ctx.accounts.stake_config.key());
+
     let pool = &mut ctx.accounts.pool;
     pool.validator = validator;
     pool.bump = ctx.bumps.pool;
@@ -30,11 +32,13 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &[
             ctx.accounts.stake_account.to_account_info(),
             ctx.accounts.rent.to_account_info(),
-            ctx.accounts.stake_program.to_account_info(), 
-
+            ctx.accounts.stake_program.to_account_info(),
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
+
+    msg!("Validator from parameter: {}", validator);
+    msg!("Validator from account: {}", ctx.accounts.validator_vote.key());
 
     // Delegate to validator
     let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &validator);
@@ -46,7 +50,8 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
             ctx.accounts.clock.to_account_info(),
             ctx.accounts.stake_history.to_account_info(),
             ctx.accounts.stake_config.to_account_info(),
-            ctx.accounts.stake_program.to_account_info(), 
+            pool.to_account_info(),
+            ctx.accounts.stake_program.to_account_info(),
 
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],

@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{
-    stake::{config::ID as STAKE_CONFIG_ID, program::ID as STAKE_PROGRAM_ID},
+    stake::{program::ID as STAKE_PROGRAM_ID, config::ID as STAKE_CONFIG_ID},
     sysvar::{clock::ID as CLOCK_ID, rent::ID as RENT_ID, stake_history::ID as STAKE_HISTORY_ID},
 };
 
@@ -33,7 +33,7 @@ pub struct InitiatePool<'info> {
     #[account(address = STAKE_HISTORY_ID)]
     pub stake_history: Sysvar<'info, StakeHistory>,
 
-    /// CHECK: Hardcoded config account for stake program
+    /// CHECK: StakeConfig account
     #[account(address = STAKE_CONFIG_ID)]
     pub stake_config: UncheckedAccount<'info>,
 

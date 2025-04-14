@@ -5,7 +5,6 @@ import {
   SystemProgram,
   Keypair,
   Connection,
-  StakeProgram,
 } from "@solana/web3.js";
 import fs from "fs";
 import stakingPoolIdl from "../idl/staking_pool.json";
@@ -18,6 +17,7 @@ const STAKE_CONFIG_ID = new PublicKey("StakeConfig111111111111111111111111111111
 const SYSVAR_CLOCK = web3.SYSVAR_CLOCK_PUBKEY;
 const SYSVAR_RENT = web3.SYSVAR_RENT_PUBKEY;
 const SYSVAR_STAKE_HISTORY = web3.SYSVAR_STAKE_HISTORY_PUBKEY;
+
 
 const path = process.env.KEY_PATH;
 const validatorId = "29MRNwc7LYWH6Bm457ch8HcLmHVGuzGGA6KNSar2snP2";
@@ -35,16 +35,16 @@ const exec = async (): Promise<void> => {
   const program = new Program(stakingPoolIdl as any, provider) as any;
   const validatorVote = new PublicKey(validatorId);
 
-  console.log(program.programId.toBase58())
+  console.log("Program ID:", program.programId.toBase58());
 
-  // 🆔 Derive pool PDA (Anchor will init this PDA inside the program)
+  // 🆔 Derive pool PDA
   const [poolPda, bump] = web3.PublicKey.findProgramAddressSync(
     [Buffer.from("pool"), payer.publicKey.toBuffer()],
     program.programId
   );
   console.log("Pool PDA:", poolPda.toBase58());
 
-  // 🏗️ Create uninitialized stake account with SystemProgram
+  // 🏗️ Create uninitialized stake account
   const stakeAccount = Keypair.generate();
   const STAKE_ACCOUNT_SPACE = 200;
   const lamports = await solanaClient.getMinimumBalanceForRentExemption(STAKE_ACCOUNT_SPACE);
@@ -61,19 +61,20 @@ const exec = async (): Promise<void> => {
   const tx1Hash = await provider.sendAndConfirm(tx1, [payer, stakeAccount]);
   console.log("✅ Stake account created:", tx1Hash);
 
-  // Debug: confirm account state
+  // Confirm it's created
   const stakeInfo = await solanaClient.getAccountInfo(stakeAccount.publicKey);
   console.log("Stake Account Owner:", stakeInfo?.owner.toBase58());
   console.log("Stake Account Data Length:", stakeInfo?.data.length);
 
-  console.log("Calling with accounts:", {
-    pool: poolPda.toBase58(),
-    stakeAccount: stakeAccount.publicKey.toBase58(),
-    validatorVote: validatorVote.toBase58(),
-    payer: payer.publicKey.toBase58(),
-  });
+  // Confirm stake config exists
+  const acc = await solanaClient.getAccountInfo(STAKE_CONFIG_ID);
+  console.log("✅ StakeConfig account exists:", acc !== null);
 
-  const ix = await program.methods
+  console.log("Validator vote account:", validatorVote.toBase58());
+
+
+  // 🧠 Call the instruction using `.rpc()`
+  await program.methods
     .initiatePoolConfig(validatorVote)
     .accounts({
       pool: poolPda,
@@ -86,13 +87,12 @@ const exec = async (): Promise<void> => {
       stakeHistory: SYSVAR_STAKE_HISTORY,
       stakeConfig: STAKE_CONFIG_ID,
       stakeProgram: STAKE_PROGRAM_ID,
+
     })
-    .instruction();
+    .signers([payer])
+    .rpc();
 
-  const tx = new web3.Transaction().add(ix);
-  const txHash = await provider.sendAndConfirm(tx, [payer]);
-
-  console.log("✅ Pool config initialized:", txHash);
+  console.log("✅ Pool config initialized via `.rpc()`");
 };
 
 exec().catch((error) => {
