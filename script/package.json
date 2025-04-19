@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "exec": "ts-node scripts/initpool.ts",
+    "exec": "ts-node scripts/deposit.ts",
     "lint": "biome lint .",
     "format:check": "biome check .",
     "format": "biome check --apply ."
@@ -21,6 +21,8 @@
     "@biomejs/biome": "1.5.3",
     "@coral-xyz/anchor": "0.30.1",
     "@solana/web3.js": "^1.98.0",
-    "@types/node": "^22.13.14"
+    "@types/bn.js": "^5.1.6",
+    "@types/node": "^22.13.14",
+    "bn.js": "^5.2.1"
   }
 }

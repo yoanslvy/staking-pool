@@ -37,12 +37,21 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
 
-    msg!("Validator from parameter: {}", validator);
+
     msg!("Validator from account: {}", ctx.accounts.validator_vote.key());
+    msg!("Stake account: {}", stake_key);
+    msg!("Pool account: {}", pool_key);
+    msg!("Stake config: {}", ctx.accounts.stake_config.key());
+    msg!("Stake history: {}", ctx.accounts.stake_history.key());
+    msg!("Clock: {}", ctx.accounts.clock.key());
+    msg!("Stake program: {}", ctx.accounts.stake_program.key());
+
+   /*  // After initializing the pool but before delegating
+    let pool_data = ctx.accounts.pool.try_borrow_data()?;
+    msg!("Pool data initialized with size: {}", pool_data.len());
 
     // Delegate to validator
-    let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &validator);
-    invoke_signed(
+    let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &ctx.accounts.validator_vote.key());    invoke_signed(
         &delegate_ix,
         &[
             ctx.accounts.stake_account.to_account_info(),
@@ -50,12 +59,11 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
             ctx.accounts.clock.to_account_info(),
             ctx.accounts.stake_history.to_account_info(),
             ctx.accounts.stake_config.to_account_info(),
-            pool.to_account_info(),
             ctx.accounts.stake_program.to_account_info(),
 
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
-    )?;
+    )?; */
 
     Ok(())
 }

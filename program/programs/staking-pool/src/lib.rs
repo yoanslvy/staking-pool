@@ -8,7 +8,7 @@ pub mod types;
 
 use accounts_ix::*;
 
-declare_id!("6RUJ9nZQVy9hVy61hh1cNJB89c3Lh554ggMHUx9NFNMS");
+declare_id!("6BgSHXAjvG37ZrugqxSgZ5nDJ9mAor5c3h3Vqb6E3p2h");
 
 #[program]
 

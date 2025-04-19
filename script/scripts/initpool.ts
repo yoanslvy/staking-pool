@@ -80,14 +80,13 @@ const exec = async (): Promise<void> => {
       pool: poolPda,
       stakeAccount: stakeAccount.publicKey,
       validatorVote,
-      payer: payer.publicKey,
-      systemProgram: SystemProgram.programId,
-      rent: SYSVAR_RENT,
       clock: SYSVAR_CLOCK,
       stakeHistory: SYSVAR_STAKE_HISTORY,
       stakeConfig: STAKE_CONFIG_ID,
+      rent: SYSVAR_RENT,
       stakeProgram: STAKE_PROGRAM_ID,
-
+      payer: payer.publicKey,
+      systemProgram: SystemProgram.programId,
     })
     .signers([payer])
     .rpc();
