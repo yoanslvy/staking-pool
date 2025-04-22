@@ -11,8 +11,8 @@ staking_pool = "6BgSHXAjvG37ZrugqxSgZ5nDJ9mAor5c3h3Vqb6E3p2h"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
-wallet = "~/.config/solana/devnet.json"
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
 
 [scripts]
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+test = "mocha -r ts-node/register -t 1000000 tests/**/*.ts"
