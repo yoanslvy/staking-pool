@@ -1,108 +1,91 @@
-# Create Token Program
+# Staking Pool Program Architecture
 
-Ce programme Solana permet de créer et de gérer des tokens personnalisés sur la blockchain Solana.
+## Overview
 
-## Fonctionnalités
+This is an Anchor-based Solana program that implements a staking pool system. The program allows users to deposit tokens, stake them, and earn rewards over time. It includes features for pool initialization, deposits, withdrawals, and reward management.
 
-- Création d'un nouveau token (mint)
-- Configuration personnalisable du nombre de décimales (par défaut: 6)
-- Mint de nouveaux tokens
-- Gestion des comptes de tokens associés
+## Core Components
 
-## Prérequis
+### 1. Program Structure
 
-- [Rust](https://rustup.rs/)
-- [Solana CLI](https://docs.solana.com/cli/install-solana-cli-tools)
-- [Anchor](https://www.anchor-lang.com/)
-- [Node.js](https://nodejs.org/)
+- **Main Program**: Located in `lib.rs`, serves as the entry point and orchestrates all program instructions
+- **Error Handling**: Custom error types defined in `error.rs`
+- **Types**: Common types and constants defined in `types.rs`
 
-## Installation
+### 2. State Management
 
-1. Clonez le dépôt :
-```bash
-git clone <votre-repo>
-cd create-token
-```
+The program maintains several key state accounts:
 
-2. Installez les dépendances :
-```bash
-yarn install
-```
+- **Pool State**: Tracks overall pool statistics and configuration
+- **User State**: Individual user staking positions and rewards
+- **Withdrawal State**: Manages pending withdrawal requests
 
-3. Construisez le programme :
-```bash
-anchor build
-```
+### 3. Instructions
 
-## Structure du Programme
+The program implements the following core instructions:
 
-Le programme contient deux instructions principales :
+#### Pool Management
 
-1. `initialize_mint` : Crée un nouveau token avec un nombre de décimales configurable
-2. `mint_token` : Frappe de nouveaux tokens et les envoie à un compte spécifié
+- `initiate_pool`: Creates and initializes a new staking pool
+- `view_pool_stats`: Retrieves current pool statistics
 
-## Utilisation
+#### User Operations
 
-### Déploiement
+- `deposit`: Allows users to deposit tokens into the pool
+- `undelegate`: Enables users to remove their stake
+- `start_withdraw`: Initiates a withdrawal process
+- `finalize_withdraw`: Completes a withdrawal after the cooldown period
+- `view_user_rewards`: Checks user's current reward balance
 
-1. Démarrez un nœud local Solana :
-```bash
-solana-test-validator
-```
+### 4. Security Features
 
-2. Déployez le programme :
-```bash
-anchor deploy
-```
+- Account validation and ownership checks
+- Proper PDA (Program Derived Address) management
+- Withdrawal cooldown periods
+- Proper token account management
 
-### Exemple d'Utilisation
+## Technical Architecture
 
-```typescript
-// Création d'un nouveau token
-const mintKeypair = Keypair.generate();
-const mintAuthority = Keypair.generate();
+### Account Structure
 
-// Initialisation du mint
-await program.methods
-  .initializeMint(null) // null pour utiliser 6 décimales par défaut
-  .accounts({
-    mint: mintKeypair.publicKey,
-    mintAuthority: mintAuthority.publicKey,
-    payer: yourWallet.publicKey,
-  })
-  .signers([mintKeypair, mintAuthority])
-  .rpc();
+The program uses a combination of:
 
-// Création du compte de tokens associé
-const tokenAccount = await getAssociatedTokenAddress(
-  mintKeypair.publicKey,
-  recipientWallet.publicKey
-);
+- Regular accounts for token management
+- PDAs for program state
+- System accounts for program interaction
 
-// Frappe de tokens
-await program.methods
-  .mintToken(new anchor.BN(100 * LAMPORTS_PER_SOL))
-  .accountsPartial({
-    mint: mintKeypair.publicKey,
-    tokenAccount: tokenAccount,
-    tokenOwner: recipientWallet.publicKey,
-    mintAuthority: mintAuthority.publicKey,
-  });
-```
+### Data Flow
 
-## Tests
+1. Pool initialization creates necessary accounts
+2. Users deposit tokens into the pool
+3. Rewards are calculated and distributed
+4. Withdrawals follow a two-step process with cooldown
 
-Pour exécuter les tests :
-```bash
-anchor test
-```
+## Development
 
-## Sécurité
+- Built using Anchor framework
+- Rust-based implementation
+- TypeScript for client interactions
+- Comprehensive test suite
 
-- Assurez-vous de bien gérer les clés d'autorité du mint
-- Vérifiez toujours les permissions avant d'effectuer des opérations de frappe
-- Utilisez des comptes de tokens associés pour la sécurité des utilisateurs
+## Dependencies
 
-## Licence
+- Anchor framework
+- Solana Program Library (SPL)
+- Various Rust crates for development and testing
 
-Ce projet est sous licence [MIT](LICENSE).
+## Testing
+
+The program will include:
+
+- Unit tests for individual instructions
+- Integration tests for complete workflows
+- Error case testing
+- State management verification
+
+## Security Considerations
+
+- Proper account validation
+- Secure token handling
+- Withdrawal cooldown periods
+- Access control mechanisms
