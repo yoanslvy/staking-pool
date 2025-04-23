@@ -3,22 +3,31 @@ Log: .anchor/test-ledger/validator.log
 Initializing...
 Waiting for fees to stabilize 1...
 Connecting...
-Identity: 8rjGh7o6CDSbBruarKkd7gzoCuxHQLoERpG9CAKrS5C6
-Genesis Hash: FsPnHo8UadjtR2tdRcHjukhkzdt4Z5aT71b43Ga8pZB9
+Identity: DXb6K4mmxykjZFHCKa272gck58Pc98jeFBMuiwQh7GQw
+Genesis Hash: 6NZskTcKUEWK7oY9hrXsFYurQs7UkWUQnGxJNbtToosC
 Version: 2.1.16
-Shred Version: 49030
+Shred Version: 2196
 Gossip Address: 127.0.0.1:1024
 TPU Address: 127.0.0.1:1027
 JSON RPC URL: http://127.0.0.1:8899
 WebSocket PubSub URL: ws://127.0.0.1:8900
-00:00:04 | Processed Slot: 8 | Confirmed Slot: 8 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 11 | ◎499.999977500
-00:00:04 | Processed Slot: 8 | Confirmed Slot: 8 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 11 | ◎499.999977500
+00:00:03 | Processed Slot: 6 | Confirmed Slot: 6 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 7 | ◎499.999982500
+00:00:03 | Processed Slot: 6 | Confirmed Slot: 6 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 7 | ◎499.999982500
+00:00:03 | Processed Slot: 7 | Confirmed Slot: 7 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 9 | ◎499.999977500
+00:00:04 | Processed Slot: 7 | Confirmed Slot: 7 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 9 | ◎499.999977500
+00:00:04 | Processed Slot: 8 | Confirmed Slot: 8 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 11 | ◎499.999980000
+00:00:04 | Processed Slot: 8 | Confirmed Slot: 8 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 11 | ◎499.999980000
 00:00:04 | Processed Slot: 9 | Confirmed Slot: 9 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 13 | ◎499.999980000
-00:00:05 | Processed Slot: 9 | Confirmed Slot: 9 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 13 | ◎499.999980000
-00:00:05 | Processed Slot: 10 | Confirmed Slot: 10 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 15 | ◎499.999980000
-00:00:05 | Processed Slot: 11 | Confirmed Slot: 11 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 17 | ◎499.999975000
-00:00:05 | Processed Slot: 11 | Confirmed Slot: 11 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 17 | ◎499.999975000
-00:00:06 | Processed Slot: 12 | Confirmed Slot: 12 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 19 | ◎499.999975000
-00:00:06 | Processed Slot: 12 | Confirmed Slot: 12 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 19 | ◎499.999975000
-00:00:06 | Processed Slot: 13 | Confirmed Slot: 13 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 21 | ◎499.999972500
-00:00:06 | Processed Slot: 13 | Confirmed Slot: 13 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 21 | ◎499.999972500
+00:00:05 | Processed Slot: 10 | Confirmed Slot: 9 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 15 | ◎499.999980000
+00:00:05 | Processed Slot: 10 | Confirmed Slot: 10 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 15 | ◎499.999975000
+00:00:05 | Processed Slot: 11 | Confirmed Slot: 11 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 17 | ◎499.999977500
+00:00:05 | Processed Slot: 11 | Confirmed Slot: 11 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 17 | ◎499.999977500
+00:00:06 | Processed Slot: 12 | Confirmed Slot: 12 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 19 | ◎499.999977500
+00:00:06 | Processed Slot: 12 | Confirmed Slot: 12 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 19 | ◎499.999977500
+00:00:06 | Processed Slot: 13 | Confirmed Slot: 13 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 21 | ◎499.999975000
+00:00:07 | Processed Slot: 13 | Confirmed Slot: 13 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 21 | ◎499.999975000
+00:00:07 | Processed Slot: 14 | Confirmed Slot: 14 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 23 | ◎499.999970000
+00:00:07 | Processed Slot: 14 | Confirmed Slot: 14 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 23 | ◎499.999970000
+00:00:07 | Processed Slot: 15 | Confirmed Slot: 15 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 25 | ◎499.999972500
+00:00:08 | Processed Slot: 16 | Confirmed Slot: 16 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 27 | ◎499.999972500
+00:00:08 | Processed Slot: 16 | Confirmed Slot: 16 | Finalized Slot: 0 | Full Snapshot Slot: - | Incremental Snapshot Slot: - | Transactions: 27 | ◎499.999972500

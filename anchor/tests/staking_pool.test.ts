@@ -79,13 +79,9 @@ describe("staking_pool: localnet tests", () => {
         expect(stats.totalShares.toNumber()).toBe(0);
     });
 
-
-
-
-    test("user can deposit into the pool after initializing user", async () => {
+    test("user can deposit into the pool ", async () => {
         const depositAmount = new anchor.BN(1_000_000); // 0.001 SOL
 
-        // Step 1: Create a new user wallet
         const userWallet = Keypair.generate();
         const userWalletPubkey = userWallet.publicKey;
 
@@ -93,24 +89,12 @@ describe("staking_pool: localnet tests", () => {
         const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
         await connection.confirmTransaction({ signature: sig, blockhash, lastValidBlockHeight });
 
-        // Step 2: Derive UserStake PDA
         const [userStakePda] = await PublicKey.findProgramAddress(
             [Buffer.from("user"), userWalletPubkey.toBuffer()],
             program.programId
         );
 
-        // Step 3: Initialize user
-        await program.methods
-            .initializeUserAccount()
-            .accounts({
-                user: userStakePda,
-                payer: userWalletPubkey,
-                systemProgram: SystemProgram.programId,
-            })
-            .signers([userWallet])
-            .rpc();
 
-        // Step 4: Create stakeAccount
         const stakeAccount = Keypair.generate();
         const stakeLamports = await connection.getMinimumBalanceForRentExemption(200);
         const createStakeIx = SystemProgram.createAccount({
@@ -118,13 +102,12 @@ describe("staking_pool: localnet tests", () => {
             newAccountPubkey: stakeAccount.publicKey,
             lamports: stakeLamports,
             space: 200,
-            programId: STAKE_PROGRAM_ID,
+            programId: new PublicKey("Stake11111111111111111111111111111111111111"),
         });
 
         const createStakeTx = new anchor.web3.Transaction().add(createStakeIx);
         await provider.sendAndConfirm(createStakeTx, [userWallet, stakeAccount]);
 
-        // Step 5: Deposit
         await program.methods
             .depositStake(depositAmount)
             .accounts({
@@ -137,7 +120,6 @@ describe("staking_pool: localnet tests", () => {
             .signers([userWallet])
             .rpc();
 
-        // Step 6: Assertions
         const userAccount = await program.account.userStake.fetch(userStakePda);
         const poolAccount = await program.account.stakingPool.fetch(poolPda);
 
@@ -145,41 +127,51 @@ describe("staking_pool: localnet tests", () => {
         expect(userAccount.shares.toNumber()).toBe(depositAmount.toNumber());
         expect(poolAccount.totalStaked.toNumber()).toBe(depositAmount.toNumber());
         expect(poolAccount.totalShares.toNumber()).toBe(depositAmount.toNumber());
-    })
+    });
 
-
-
-    test("user can start a withdrawal and sets timestamp", async () => {
+    test("user can start a withdrawal", async () => {
         const userWallet = Keypair.generate();
         const userWalletPubkey = userWallet.publicKey;
 
-        // Airdrop SOL
+
         const sig = await connection.requestAirdrop(userWalletPubkey, 2 * anchor.web3.LAMPORTS_PER_SOL);
         const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
         await connection.confirmTransaction({ signature: sig, blockhash, lastValidBlockHeight });
 
-        // Derive UserStake PDA
         const [userStakePda] = await PublicKey.findProgramAddress(
             [Buffer.from("user"), userWalletPubkey.toBuffer()],
             program.programId
         );
 
-        // Call initializeUserAccount
+        const stakeAccount = Keypair.generate();
+        const stakeLamports = await connection.getMinimumBalanceForRentExemption(200);
+        const createStakeIx = SystemProgram.createAccount({
+            fromPubkey: userWalletPubkey,
+            newAccountPubkey: stakeAccount.publicKey,
+            lamports: stakeLamports,
+            space: 200,
+            programId: new PublicKey("Stake11111111111111111111111111111111111111"),
+        });
+
+        const createStakeTx = new anchor.web3.Transaction().add(createStakeIx);
+        await provider.sendAndConfirm(createStakeTx, [userWallet, stakeAccount]);
+
+        const depositAmount = new anchor.BN(1_000_000); // 0.001 SOL
         await program.methods
-            .initializeUserAccount()
+            .depositStake(depositAmount)
             .accounts({
+                userWallet: userWalletPubkey,
+                stakeAccount: stakeAccount.publicKey,
                 user: userStakePda,
-                payer: userWalletPubkey,
+                pool: poolPda,
                 systemProgram: SystemProgram.programId,
             })
             .signers([userWallet])
             .rpc();
 
-        // Ensure it’s null before
         let userAccount = await program.account.userStake.fetch(userStakePda);
         expect(userAccount.withdrawRequestedAt).toBeNull();
 
-        // Call startWithdrawStake
         await program.methods
             .startWithdrawStake()
             .accounts({
@@ -188,16 +180,63 @@ describe("staking_pool: localnet tests", () => {
             })
             .rpc();
 
-        // Check it’s set after
         userAccount = await program.account.userStake.fetch(userStakePda);
         expect(userAccount.withdrawRequestedAt).not.toBeNull();
 
         const now = Math.floor(Date.now() / 1000);
         const withdrawTime = userAccount.withdrawRequestedAt.toNumber();
 
-        expect(Math.abs(withdrawTime - now)).toBeLessThan(10); // within 10 seconds
+        expect(Math.abs(withdrawTime - now)).toBeLessThan(10);
     });
 
+    test("returns the correct user rewards from view_user_rewards", async () => {
+        const userWallet = Keypair.generate();
+        const userWalletPubkey = userWallet.publicKey;
 
+        const sig = await connection.requestAirdrop(userWalletPubkey, 2 * anchor.web3.LAMPORTS_PER_SOL);
+        const { blockhash, lastValidBlockHeight } = await connection.getLatestBlockhash();
+        await connection.confirmTransaction({ signature: sig, blockhash, lastValidBlockHeight });
+
+        const [userStakePda] = await PublicKey.findProgramAddress(
+            [Buffer.from("user"), userWalletPubkey.toBuffer()],
+            program.programId
+        );
+
+        const stakeAccount = Keypair.generate();
+        const stakeLamports = await connection.getMinimumBalanceForRentExemption(200);
+        const createStakeIx = SystemProgram.createAccount({
+            fromPubkey: userWalletPubkey,
+            newAccountPubkey: stakeAccount.publicKey,
+            lamports: stakeLamports,
+            space: 200,
+            programId: new PublicKey("Stake11111111111111111111111111111111111111"),
+        });
+        const createStakeTx = new anchor.web3.Transaction().add(createStakeIx);
+        await provider.sendAndConfirm(createStakeTx, [userWallet, stakeAccount]);
+
+        const depositAmount = new anchor.BN(1_000_000);
+        await program.methods
+            .depositStake(depositAmount)
+            .accounts({
+                userWallet: userWalletPubkey,
+                stakeAccount: stakeAccount.publicKey,
+                user: userStakePda,
+                pool: poolPda,
+                systemProgram: SystemProgram.programId,
+            })
+            .signers([userWallet])
+            .rpc();
+
+        const rewards = await program.methods
+            .viewCurrentUserRewards()
+            .accounts({
+                user: userStakePda,
+                pool: poolPda,
+            })
+            .view();
+
+        expect(rewards.totalStaked.toNumber()).toBe(depositAmount.toNumber());
+        expect(rewards.totalShares.toNumber()).toBe(depositAmount.toNumber());
+    });
 
 });

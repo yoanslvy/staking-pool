@@ -31,13 +31,15 @@ pub fn finalize_withdraw(ctx: Context<FinalizeWithdraw>) -> Result<()> {
         None,
     );
     invoke(
-        &ix,
-        &[
-            ctx.accounts.stake_account.clone(),
-            ctx.accounts.user_wallet.to_account_info(),
-            ctx.accounts.pool.to_account_info(),
-            ctx.accounts.clock.clone(),
-        ],
-    )?;
+    &ix,
+    &[
+        ctx.accounts.stake_account.clone(),
+        ctx.accounts.user_wallet.to_account_info(),
+        ctx.accounts.pool.to_account_info(),
+        ctx.accounts.clock.to_account_info(),          
+        ctx.accounts.stake_history.to_account_info(),   
+    ],
+)?;
+
     Ok(())
 }

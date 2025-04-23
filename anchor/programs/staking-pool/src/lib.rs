@@ -16,15 +16,11 @@ pub mod staking_pool {
     use super::*;
 
     use self::instructions::{
-        initiate_pool, initialize_user, undelegate, deposit, finalize_withdraw, start_withdraw, view_user_rewards, view_pool_stats
+        initiate_pool, undelegate, deposit, finalize_withdraw, start_withdraw, view_user_rewards, view_pool_stats
     };
 
     pub fn initiate_pool_config(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()> {
         initiate_pool(ctx, validator)
-    }
-
-    pub fn initialize_user_account(ctx: Context<InitializeUser>) -> Result<()> {
-        initialize_user(ctx)
     }
 
     pub fn undelegate_pool_stake(ctx: Context<Undelegate>) -> Result<()> {

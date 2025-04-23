@@ -35,7 +35,24 @@
         },
         {
           "name": "user",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_wallet"
+              }
+            ]
+          }
         },
         {
           "name": "system_program",
@@ -68,7 +85,7 @@
           "signer": true
         },
         {
-          "name": "pool",
+          "name": "stake_account",
           "writable": true
         },
         {
@@ -76,58 +93,16 @@
           "writable": true
         },
         {
-          "name": "stake_account",
+          "name": "pool",
           "writable": true
         },
         {
           "name": "clock",
           "address": "SysvarC1ock11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "initialize_user_account",
-      "discriminator": [
-        131,
-        248,
-        61,
-        211,
-        152,
-        205,
-        122,
-        238
-      ],
-      "accounts": [
-        {
-          "name": "user",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  117,
-                  115,
-                  101,
-                  114
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "payer"
-              }
-            ]
-          }
         },
         {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "system_program",
-          "address": "11111111111111111111111111111111"
+          "name": "stake_history",
+          "address": "SysvarStakeHistory1111111111111111111111111"
         }
       ],
       "args": []

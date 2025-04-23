@@ -1,6 +1,6 @@
 Streaming transaction logs mentioning AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR. Confirmed commitment
 Transaction executed in slot 6:
-  Signature: R6dVXSxVjYLx5c6NedWaoKVh4BY79Pc63m1HSomY4rRcpYgmihnQGaEJ4CDiZNhoLPzGyzCzjdGhG4CYPGaLhm1
+  Signature: 42apAVKSaADTmDYy8JFKzeWNvKWj7Cgf1QPfZBATYSFRMW3WS6fG3jnhGLr2LPSK1RSUPNYc8RqTypcrTsRyCiob
   Status: Ok
   Log Messages:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
@@ -9,40 +9,34 @@ Transaction executed in slot 6:
     Program 11111111111111111111111111111111 success
     Program Stake11111111111111111111111111111111111111 invoke [2]
     Program Stake11111111111111111111111111111111111111 success
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 13988 of 200000 compute units
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 14010 of 200000 compute units
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
-Transaction executed in slot 8:
-  Signature: 5QngYL3y2z1NK27zSqGPRU61k9djM1SMfvKy5RFmThfaaxbJRN1bYNEFi6FtPVZAXg7Vy7zUnT8n8GwNy5LPdRHp
-  Status: Ok
-  Log Messages:
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
-    Program log: Instruction: InitializeUserAccount
-    Program 11111111111111111111111111111111 invoke [2]
-    Program 11111111111111111111111111111111 success
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 8895 of 200000 compute units
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
-Transaction executed in slot 10:
-  Signature: 2hMfecqorhgaPjhJVW6fePxraUiefHhWdz7fzLfu6i8LvAh18eruf2fxpusmiF9MzVQA8Tp3rkmopQ53NRDext9g
+Transaction executed in slot 9:
+  Signature: SvEtSoiMye1YbnUob7vkcLEd6e1Vtn8ZqUsUNhtLiANRSsmPo8PQFXh7d3Rz4CHUADegD53ivLaUZ7Xj18UcK5Q
   Status: Ok
   Log Messages:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
     Program log: Instruction: DepositStake
     Program 11111111111111111111111111111111 invoke [2]
     Program 11111111111111111111111111111111 success
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 5134 of 200000 compute units
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 11073 of 200000 compute units
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
 Transaction executed in slot 12:
-  Signature: 3j7yuyLqYnZ1kVqUmghbK4DfLnVxUp72EwJkxA1vYErMYNRj2sWtnkycmWPsBYfW3RCNqP4uyYwM3QkdP5hHHJhS
+  Signature: 4XaPuVLo7BcnbFbottf33phQueXPXp6sqUQrWP7b7AhACgxFeiXgVcF5TBwWfX9B7XxtwfBttnkkbYNqB2dfcDfW
   Status: Ok
   Log Messages:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
-    Program log: Instruction: InitializeUserAccount
+    Program log: Instruction: DepositStake
     Program 11111111111111111111111111111111 invoke [2]
     Program 11111111111111111111111111111111 success
-    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 7395 of 200000 compute units
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 11134 of 200000 compute units
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
 Transaction executed in slot 12:
-  Signature: 64mvvBMHPcYiSfFtLazNGp9ZtFQ1jJhJErsZYivDLcQJe6rnx76wjmNkbSCQd3y6cDFQkW7qf7ptUvuTrAkVB48U
+  Signature: 2tsSP2oTXUCwzLCmTMgs1VNz6ekCK9afHLdWp9hBQKME9K6fZ839jH5xwfkyarNwGtD7kEC1wU9c64NjJ1n2dvrh
   Status: Ok
   Log Messages:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
@@ -50,10 +44,31 @@ Transaction executed in slot 12:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 1700 of 200000 compute units
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
 Transaction executed in slot 13:
-  Signature: 64mvvBMHPcYiSfFtLazNGp9ZtFQ1jJhJErsZYivDLcQJe6rnx76wjmNkbSCQd3y6cDFQkW7qf7ptUvuTrAkVB48U
+  Signature: 2tsSP2oTXUCwzLCmTMgs1VNz6ekCK9afHLdWp9hBQKME9K6fZ839jH5xwfkyarNwGtD7kEC1wU9c64NjJ1n2dvrh
   Status: Ok
   Log Messages:
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
     Program log: Instruction: StartWithdrawStake
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 1700 of 200000 compute units
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
+Transaction executed in slot 16:
+  Signature: 2AcG7MCuFcVbW3zunHuo9sgg5dkhmbFQTyqgqdpAwGdDfZ8sBcXwwfPTwcJ2DYsngakJV75AM6xQnqYLUjHVdDqR
+  Status: Ok
+  Log Messages:
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
+    Program log: Instruction: DepositStake
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 12634 of 200000 compute units
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
+Transaction executed in slot 16:
+  Signature: 1111111111111111111111111111111111111111111111111111111111111111
+  Status: Ok
+  Log Messages:
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
+    Program log: Instruction: ViewCurrentUserRewards
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 1596 of 200000 compute units
+    Program return: AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR QEIPAAAAAABAQg8AAAAAAA==
     Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success

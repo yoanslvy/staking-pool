@@ -41,7 +41,24 @@ export type StakingPool = {
         },
         {
           "name": "user",
-          "writable": true
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "userWallet"
+              }
+            ]
+          }
         },
         {
           "name": "systemProgram",
@@ -74,7 +91,7 @@ export type StakingPool = {
           "signer": true
         },
         {
-          "name": "pool",
+          "name": "stakeAccount",
           "writable": true
         },
         {
@@ -82,58 +99,16 @@ export type StakingPool = {
           "writable": true
         },
         {
-          "name": "stakeAccount",
+          "name": "pool",
           "writable": true
         },
         {
           "name": "clock",
           "address": "SysvarC1ock11111111111111111111111111111111"
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "initializeUserAccount",
-      "discriminator": [
-        131,
-        248,
-        61,
-        211,
-        152,
-        205,
-        122,
-        238
-      ],
-      "accounts": [
-        {
-          "name": "user",
-          "writable": true,
-          "pda": {
-            "seeds": [
-              {
-                "kind": "const",
-                "value": [
-                  117,
-                  115,
-                  101,
-                  114
-                ]
-              },
-              {
-                "kind": "account",
-                "path": "payer"
-              }
-            ]
-          }
         },
         {
-          "name": "payer",
-          "writable": true,
-          "signer": true
-        },
-        {
-          "name": "systemProgram",
-          "address": "11111111111111111111111111111111"
+          "name": "stakeHistory",
+          "address": "SysvarStakeHistory1111111111111111111111111"
         }
       ],
       "args": []
