@@ -35,7 +35,7 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
     )?;
 
-    let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &ctx.accounts.validator_vote.key());    invoke_signed(
+/*     let delegate_ix = stake_instruction::delegate_stake(&stake_key, &pool_key, &ctx.accounts.validator_vote.key());    invoke_signed(
         &delegate_ix,
         &[
             ctx.accounts.stake_account.to_account_info(),
@@ -47,7 +47,7 @@ pub fn initiate_pool(ctx: Context<InitiatePool>, validator: Pubkey) -> Result<()
 
         ],
         &[&[b"pool", ctx.accounts.payer.key.as_ref(), &[pool.bump]]],
-    )?;
+    )?; */
 
     Ok(())
 }

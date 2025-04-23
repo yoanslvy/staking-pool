@@ -1,8 +1,0 @@
-/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/deps/libspl_token_group_interface-19f7fe6dc0807397.rmeta: /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/lib.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/error.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/instruction.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/state.rs
-
-/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/deps/spl_token_group_interface-19f7fe6dc0807397.d: /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/lib.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/error.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/instruction.rs /Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/state.rs
-
-/Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/lib.rs:
-/Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/error.rs:
-/Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/instruction.rs:
-/Users/yoansalvayre/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/spl-token-group-interface-0.2.5/src/state.rs:
