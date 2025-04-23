@@ -14,12 +14,13 @@ impl StakingPool {
 
 #[account]
 pub struct UserStake {
-    pub user: Pubkey,          
-    pub amount_staked: u64,    
-    pub shares: u64,           
+    pub user: Pubkey,
+    pub amount_staked: u64,
+    pub shares: u64,
     pub withdraw_requested_at: Option<u64>,
 }
 
 impl UserStake {
-    pub const SIZE: usize = 32 + 8 + 8; 
+    pub const SIZE: usize = 32 + 8 + 8 + 1 + 8;
 }
+
