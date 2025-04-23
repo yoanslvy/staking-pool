@@ -1,0 +1,13 @@
+Streaming transaction logs mentioning AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR. Confirmed commitment
+Transaction executed in slot 5:
+  Signature: 2PFWroKRNJzySLfzxot3NtXEn9AdM3PF83buiff2AYKycznm7S1kQTNauwQbfNotavjCmPJp5zJXSx5MBsp7E2jR
+  Status: Ok
+  Log Messages:
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR invoke [1]
+    Program log: Instruction: InitiatePoolConfig
+    Program 11111111111111111111111111111111 invoke [2]
+    Program 11111111111111111111111111111111 success
+    Program Stake11111111111111111111111111111111111111 invoke [2]
+    Program Stake11111111111111111111111111111111111111 success
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR consumed 13988 of 200000 compute units
+    Program AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR success
