@@ -76,16 +76,6 @@ The program uses a combination of:
 
 ## Testing
 
-The program will include:
+The program includes:
 
 - Unit tests for individual instructions
-- Integration tests for complete workflows
-- Error case testing
-- State management verification
-
-## Security Considerations
-
-- Proper account validation
-- Secure token handling
-- Withdrawal cooldown periods
-- Access control mechanisms
