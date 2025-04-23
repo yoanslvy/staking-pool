@@ -5,7 +5,7 @@
  * IDL can be found at `target/idl/staking_pool.json`.
  */
 export type StakingPool = {
-  "address": "AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR",
+  "address": "Dycb1HyBvfpejXcr1MNEvCoU68hjeA7umguTtvYHGo3P",
   "metadata": {
     "name": "stakingPool",
     "version": "0.1.0",
@@ -128,9 +128,6 @@ export type StakingPool = {
       "accounts": [
         {
           "name": "pool",
-          "docs": [
-            "Unique pool PDA derived from seed [\"pool\", payer]"
-          ],
           "writable": true,
           "pda": {
             "seeds": [
@@ -159,9 +156,6 @@ export type StakingPool = {
         },
         {
           "name": "clock",
-          "docs": [
-            "Sysvars and constants"
-          ],
           "address": "SysvarC1ock11111111111111111111111111111111"
         },
         {
@@ -182,9 +176,6 @@ export type StakingPool = {
         },
         {
           "name": "payer",
-          "docs": [
-            "Transaction payer"
-          ],
           "writable": true,
           "signer": true
         },

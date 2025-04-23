@@ -1,5 +1,5 @@
 {
-  "address": "AJVjSM27wBjwAcmFn1sb6E7fxjCXstw5cvSEnGrxwcfR",
+  "address": "Dycb1HyBvfpejXcr1MNEvCoU68hjeA7umguTtvYHGo3P",
   "metadata": {
     "name": "staking_pool",
     "version": "0.1.0",
@@ -122,9 +122,6 @@
       "accounts": [
         {
           "name": "pool",
-          "docs": [
-            "Unique pool PDA derived from seed [\"pool\", payer]"
-          ],
           "writable": true,
           "pda": {
             "seeds": [
@@ -153,9 +150,6 @@
         },
         {
           "name": "clock",
-          "docs": [
-            "Sysvars and constants"
-          ],
           "address": "SysvarC1ock11111111111111111111111111111111"
         },
         {
@@ -176,9 +170,6 @@
         },
         {
           "name": "payer",
-          "docs": [
-            "Transaction payer"
-          ],
           "writable": true,
           "signer": true
         },

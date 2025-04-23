@@ -2,7 +2,6 @@ use anchor_lang::prelude::*;
 use crate::types::StakingStats;
 use crate::accounts_ix::ViewPoolStats;
 
-
 pub fn view_pool_stats(ctx: Context<ViewPoolStats>) -> Result<StakingStats> {
     let pool = &ctx.accounts.pool;
     Ok(StakingStats {

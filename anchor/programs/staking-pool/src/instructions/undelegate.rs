@@ -2,7 +2,6 @@ use anchor_lang::prelude::*;
 use anchor_lang::solana_program::{program::invoke, stake};
 use crate::accounts_ix::Undelegate;
 
-
 pub fn undelegate(ctx: Context<Undelegate>) -> Result<()> {
     let pool = &ctx.accounts.pool;
     let ix = stake::instruction::deactivate_stake(

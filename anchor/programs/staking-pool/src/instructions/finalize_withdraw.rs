@@ -39,7 +39,6 @@ pub fn finalize_withdraw(ctx: Context<FinalizeWithdraw>) -> Result<()> {
         ctx.accounts.clock.to_account_info(),          
         ctx.accounts.stake_history.to_account_info(),   
     ],
-)?;
-
+    )?;
     Ok(())
 }

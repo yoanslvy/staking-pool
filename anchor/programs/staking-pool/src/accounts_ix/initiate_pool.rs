@@ -8,7 +8,6 @@ use crate::state::*;
 
 #[derive(Accounts)]
 pub struct InitiatePool<'info> {
-    /// Unique pool PDA derived from seed ["pool", payer]
     #[account(
         init,
         seeds = [b"pool", payer.key().as_ref()],
@@ -25,7 +24,6 @@ pub struct InitiatePool<'info> {
     /// CHECK: Not deserialized, just used for pubkey
     pub validator_vote: UncheckedAccount<'info>,
 
-    /// Sysvars and constants
     #[account(address = CLOCK_ID)]
     pub clock: Sysvar<'info, Clock>,
 
@@ -45,7 +43,6 @@ pub struct InitiatePool<'info> {
     #[account(address = STAKE_PROGRAM_ID)]
     pub stake_program: UncheckedAccount<'info>,
 
-    /// Transaction payer
     #[account(mut)]
     pub payer: Signer<'info>,
 
