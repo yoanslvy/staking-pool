@@ -6,6 +6,7 @@ skip-lint = false
 
 [programs.devnet]
 staking_pool = "6RUJ9nZQVy9hVy61hh1cNJB89c3Lh554ggMHUx9NFNMS"
+staking_pool_iza = "REPLACED_AT_DEPLOY"
 
 [registry]
 url = "https://api.apr.dev"

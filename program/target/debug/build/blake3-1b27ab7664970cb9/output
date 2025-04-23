@@ -13,7 +13,7 @@ cargo:rerun-if-env-changed=CARGO_FEATURE_NEON
 cargo:rerun-if-env-changed=CARGO_FEATURE_NO_NEON
 cargo:rerun-if-env-changed=CARGO_FEATURE_PURE
 cargo:rustc-cfg=blake3_neon
-OUT_DIR = Some(/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/build/blake3-1b27ab7664970cb9/out)
+OUT_DIR = Some(/Volumes/PASSENGER/Iza-dev/Projects/Solana/staking-pool/program/target/debug/build/blake3-1b27ab7664970cb9/out)
 OPT_LEVEL = Some(0)
 TARGET = Some(aarch64-apple-darwin)
 HOST = Some(aarch64-apple-darwin)
@@ -22,7 +22,7 @@ CC_aarch64_apple_darwin = None
 HOST_CC = None
 CC = None
 cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
-RUSTC_WRAPPER = None
+RUSTC_WRAPPER = Some(/Users/vivienne/.vscode/extensions/rust-lang.rust-analyzer-0.3.2379-darwin-arm64/server/rust-analyzer)
 CRATE_CC_NO_DEFAULTS = None
 DEBUG = Some(true)
 MACOSX_DEPLOYMENT_TARGET = None
@@ -40,7 +40,7 @@ ARFLAGS_aarch64_apple_darwin = None
 HOST_ARFLAGS = None
 ARFLAGS = None
 cargo:rustc-link-lib=static=blake3_neon
-cargo:rustc-link-search=native=/Users/yoansalvayre/Desktop/staking-pool-alyra/program/target/debug/build/blake3-1b27ab7664970cb9/out
+cargo:rustc-link-search=native=/Volumes/PASSENGER/Iza-dev/Projects/Solana/staking-pool/program/target/debug/build/blake3-1b27ab7664970cb9/out
 cargo:rerun-if-env-changed=CC
 cargo:rerun-if-env-changed=CFLAGS
 cargo:rerun-if-changed=c/blake3_sse41_x86-64_windows_msvc.asm
