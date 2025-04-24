@@ -13,7 +13,10 @@ pub struct FinalizeWithdraw<'info> {
     /// CHECK: Stake account holding delegated SOL
     pub stake_account: AccountInfo<'info>,
 
-    #[account(mut)]
+    #[account(
+        mut,
+        close = user_wallet
+    )]
     pub user: Account<'info, UserStake>,
 
     #[account(mut)]
